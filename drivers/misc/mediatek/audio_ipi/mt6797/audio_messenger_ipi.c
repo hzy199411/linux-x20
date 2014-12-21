@@ -14,6 +14,7 @@
 #include "audio_messenger_ipi.h"
 
 #include <linux/spinlock.h>
+#include <linux/io.h>
 #include <scp_ipi.h>
 
 #include "audio_log.h"

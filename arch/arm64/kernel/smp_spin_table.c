@@ -19,6 +19,7 @@
 #include <linux/delay.h>
 #include <linux/init.h>
 #include <linux/of.h>
+#include <linux/io.h>
 #include <linux/smp.h>
 #include <linux/types.h>
 

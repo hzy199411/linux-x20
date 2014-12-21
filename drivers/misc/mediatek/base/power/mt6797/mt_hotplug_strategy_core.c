@@ -110,12 +110,13 @@ static void hps_get_sysinfo(void)
 	char *str1_ptr = str1;
 	char *str2_ptr = str2;
 	int scaled_tlp, avg_tlp;
+#ifdef CONFIG_MTK_SCHED_RQAVG_US
 	/* AHT: Average heavy task */
+	int heavy_task_threshold = get_heavy_task_threshold();
+	int avg_heavy_task_threshold = get_avg_heavy_task_threshold();
 	int lastpoll_htask1 = 0, lastpoll_htask2 = 0;
 	int avg_htask = 0, avg_htask_scal = 0;
 	int max;
-	int heavy_task_threshold = get_heavy_task_threshold();
-	int avg_heavy_task_threshold = get_avg_heavy_task_threshold();
 	int lastpoll_htask_idx1_1 = 0;
 	int lastpoll_htask_idx1_2 = 0;
 	int lastpoll_htask_idx2_1 = 0;
@@ -123,6 +124,7 @@ static void hps_get_sysinfo(void)
 	int avg_htask_scal_idx1 = 0;
 	int avg_htask_scal_idx2 = 0;
 	int max_idx1 = 0;
+#endif
 	/*
 	 * calculate cpu loading
 	 */

@@ -20,6 +20,7 @@
 #include <linux/smp.h>
 #include <linux/reboot.h>
 #include <linux/pm.h>
+#include <linux/io.h>
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
