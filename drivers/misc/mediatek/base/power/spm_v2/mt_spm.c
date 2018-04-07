@@ -1028,14 +1028,14 @@ void spm_twam_set_idle_select(unsigned int sel)
 {
 	idle_sel = sel & 0x3;
 }
-EXPORT_SYMBOL(spm_twam_set_idle_select)
+EXPORT_SYMBOL(spm_twam_set_idle_select);
 
 static unsigned int window_len;
 void spm_twam_set_window_length(unsigned int len)
 {
 	window_len = len;
 }
-EXPORT_SYMBOL(spm_twam_set_window_length)
+EXPORT_SYMBOL(spm_twam_set_window_length);
 
 static struct twam_sig mon_type;
 void spm_twam_set_mon_type(struct twam_sig *mon)
@@ -1047,7 +1047,7 @@ void spm_twam_set_mon_type(struct twam_sig *mon)
 		mon_type.sig3 = mon->sig3 & 0x3;
 	}
 }
-EXPORT_SYMBOL(spm_twam_set_mon_type)
+EXPORT_SYMBOL(spm_twam_set_mon_type);
 
 void spm_twam_register_handler(twam_handler_t handler)
 {
