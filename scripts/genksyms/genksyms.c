@@ -233,10 +233,10 @@ static struct symbol *__add_symbol(const char *name, enum symbol_type type,
 		free_list(last_enum_expr, NULL);
 		last_enum_expr = NULL;
 		enum_counter = 0;
-		if (!name)
-			/* Anonymous enum definition, nothing more to do */
-			return NULL;
 	}
+	if (!name)
+		/* Anonymous enum definition, nothing more to do */
+		return NULL;
 
 	h = crc32(name) % HASH_BUCKETS;
 	for (sym = symtab[h]; sym; sym = sym->hash_next) {
