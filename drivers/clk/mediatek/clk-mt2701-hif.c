@@ -53,8 +53,12 @@ static int mtk_hifsys_init(struct platform_device *pdev)
 						clk_data);
 
 	r = of_clk_add_provider(node, of_clk_src_onecell_get, clk_data);
+	if (r)
+		return r;
 
-	return r;
+	mtk_register_reset_controller(node, 1, 0x34);
+
+	return 0;
 }
 
 static const struct of_device_id of_match_clk_mt2701_hif[] = {
