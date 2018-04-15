@@ -8,6 +8,7 @@ Required properties:
 	"mediatek,mt8173-sysirq"
 	"mediatek,mt8135-sysirq"
 	"mediatek,mt8127-sysirq"
+	"mediatek,mt6797-sysirq"
 	"mediatek,mt6795-sysirq"
 	"mediatek,mt6755-sysirq"
 	"mediatek,mt6592-sysirq"
@@ -21,7 +22,8 @@ Required properties:
 - interrupt-parent: phandle of irq parent for sysirq. The parent must
   use the same interrupt-cells format as GIC.
 - reg: Physical base address of the intpol registers and length of memory
-  mapped region.
+  mapped region. Could be up to 2 registers here at max. Ex: 6797 needs 2 reg,
+  others need 1.
 
 Example:
 	sysirq: interrupt-controller@10200100 {
