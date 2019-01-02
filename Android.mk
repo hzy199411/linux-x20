@@ -61,17 +61,9 @@ ifneq ($(strip $(TARGET_NO_KERNEL)),true)
   ifeq ($(wildcard $(TARGET_PREBUILT_KERNEL)),)
     KERNEL_OUT ?= $(if $(filter /% ~%,$(TARGET_OUT_INTERMEDIATES)),,$(KERNEL_ROOT_DIR)/)$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
     ifeq ($(TARGET_ARCH), arm64)
-      ifeq ($(MTK_APPENDED_DTB_SUPPORT), yes)
         KERNEL_ZIMAGE_OUT := $(KERNEL_OUT)/arch/$(TARGET_ARCH)/boot/Image.gz-dtb
-      else
-        KERNEL_ZIMAGE_OUT := $(KERNEL_OUT)/arch/$(TARGET_ARCH)/boot/Image.gz
-      endif
     else
-      ifeq ($(MTK_APPENDED_DTB_SUPPORT), yes)
         KERNEL_ZIMAGE_OUT := $(KERNEL_OUT)/arch/$(TARGET_ARCH)/boot/zImage-dtb
-      else
-        KERNEL_ZIMAGE_OUT := $(KERNEL_OUT)/arch/$(TARGET_ARCH)/boot/zImage
-      endif
     endif
     ifeq ($(strip $(MTK_INTERNAL)),yes)
       KBUILD_BUILD_USER ?= mediatek
@@ -155,28 +147,6 @@ kernel-menuconfig:
 
 clean-kernel:
 	$(hide) rm -rf $(KERNEL_OUT) $(KERNEL_MODULES_OUT) $(INSTALLED_KERNEL_TARGET)
-
-.PHONY: check-kernel-config check-kernel-dotconfig
-droid: check-kernel-config check-kernel-dotconfig
-check-mtk-config: check-kernel-config check-kernel-dotconfig
-check-kernel-config:
-ifneq (yes,$(strip $(DISABLE_MTK_CONFIG_CHECK)))
-	python device/mediatek/build/build/tools/check_kernel_config.py -c $(MTK_TARGET_PROJECT_FOLDER)/ProjectConfig.mk -k $(KERNEL_CONFIG_FILE) -p $(MTK_PROJECT_NAME)
-else
-	-python device/mediatek/build/build/tools/check_kernel_config.py -c $(MTK_TARGET_PROJECT_FOLDER)/ProjectConfig.mk -k $(KERNEL_CONFIG_FILE) -p $(MTK_PROJECT_NAME)
-endif
-
-
-ifneq ($(filter check-mtk-config check-kernel-dotconfig,$(MAKECMDGOALS)),)
-.PHONY: $(TARGET_KERNEL_CONFIG)
-endif
-check-kernel-dotconfig: $(TARGET_KERNEL_CONFIG)
-ifneq (yes,$(strip $(DISABLE_MTK_CONFIG_CHECK)))
-	python device/mediatek/build/build/tools/check_kernel_config.py -c $(MTK_TARGET_PROJECT_FOLDER)/ProjectConfig.mk -k $(TARGET_KERNEL_CONFIG) -p $(MTK_PROJECT_NAME)
-else
-	-python device/mediatek/build/build/tools/check_kernel_config.py -c $(MTK_TARGET_PROJECT_FOLDER)/ProjectConfig.mk -k $(TARGET_KERNEL_CONFIG) -p $(MTK_PROJECT_NAME)
-endif
-
 
 endif#TARGET_NO_KERNEL
 endif#LINUX_KERNEL_VERSION
