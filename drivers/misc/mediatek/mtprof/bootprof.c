@@ -78,13 +78,11 @@ void log_boot(char *str)
 static void bootup_finish(void)
 {
 	initcall_debug = 0;
-#ifdef CONFIG_MT_PRINTK_UART_CONSOLE
-	mt_disable_uart();
-#endif
+	/* mt_disable_uart(); */
+	/* printk_too_much_enable = 1; */
 #ifdef CONFIG_MT_SCHED_MON_DEFAULT_ENABLE
 	mt_sched_monitor_switch(1);
 #endif
-	set_logtoomuch_enable(1);
 #ifdef CONFIG_CPU_DVFS_SYSTEM_BOOTUP_BOOST
 	mt_cpufreq_set_min_freq(MT_CPU_DVFS_LITTLE, 0);
 #endif

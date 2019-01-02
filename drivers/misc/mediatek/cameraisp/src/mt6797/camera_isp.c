@@ -7761,7 +7761,7 @@ static MINT32 ISP_open(
 	struct file *pFile)
 {
 	MINT32 Ret = 0;
-	MUINT32 i, j;
+	MUINT32 i=0, j=0;
 	int q = 0, p = 0;
 	ISP_USER_INFO_STRUCT *pUserInfo;
 
@@ -7791,11 +7791,6 @@ static MINT32 ISP_open(
 	} else {
 		IspInfo.UserCount++;
 		spin_unlock(&(IspInfo.SpinLockIspRef));
-
-		/* kernellog limit to (current+150) lines per second */
-		pr_detect_count = get_detect_count();
-		i = pr_detect_count + 150;
-		set_detect_count(i);
 
 		LOG_DBG("Curr UserCount(%d), (process, pid, tgid)=(%s, %d, %d), log_limit_line(%d), first user\n",
 			IspInfo.UserCount, current->comm, current->pid, current->tgid, i);
@@ -8023,9 +8018,6 @@ static MINT32 ISP_release(
 		spin_unlock(&(IspInfo.SpinLockIspRef));
 	}
 
-	/* kernel log limit back to default */
-	set_detect_count(pr_detect_count);
-	/*      */
 	LOG_DBG("Curr UserCount(%d), (process, pid, tgid)=(%s, %d, %d), log_limit_line(%d),	last user",
 		IspInfo.UserCount, current->comm, current->pid, current->tgid, pr_detect_count);
 

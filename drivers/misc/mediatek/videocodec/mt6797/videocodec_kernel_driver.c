@@ -1661,19 +1661,6 @@ static long vcodec_unlocked_ioctl(struct file *file, unsigned int cmd, unsigned 
 			return -EFAULT;
 		}
 
-		if (rIncLogCount == VAL_TRUE) {
-			if (gu4LogCountUser == 0) {
-				gu4LogCount = get_detect_count();
-				set_detect_count(gu4LogCount + 200);
-			}
-			gu4LogCountUser++;
-		} else {
-			gu4LogCountUser--;
-			if (gu4LogCountUser == 0) {
-				set_detect_count(gu4LogCount);
-				gu4LogCount = 0;
-			}
-		}
 		mutex_unlock(&LogCountLock);
 
 		MODULE_MFV_LOGD("VCODEC_SET_LOG_COUNT - tid = %d\n", current->pid);
