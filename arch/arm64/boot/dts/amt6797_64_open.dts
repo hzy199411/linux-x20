@@ -153,6 +153,22 @@
 		};
 	};
 
+	firmware {
+		android {
+			compatible = "android,firmware";
+			fstab {
+				compatible = "android,fstab";
+				system {
+					compatible = "android,system";
+					dev = "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/system";
+					type = "ext4";
+					mnt_flags = "ro" ;
+					fsmgr_flags = "wait";
+					status = "ok";
+				};
+			};
+		};
+	};
 	mt8193hdmi:mt8193hdmi@0 {
 		compatible = "mediatek,mt8193-hdmi";
 	};
