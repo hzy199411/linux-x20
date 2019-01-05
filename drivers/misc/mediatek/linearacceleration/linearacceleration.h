@@ -38,7 +38,6 @@
 #include <hwmsensor.h>
 
 
-#define DEBUG
 #ifdef DEBUG
 #define LA_TAG					"<LINEARACCEL> "
 #define LA_FUN(f)				pr_debug(LA_TAG"%s\n", __func__)

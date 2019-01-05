@@ -19,11 +19,12 @@
 #include <linux/bug.h>
 #include <mt-plat/aee.h>
 #include <linux/kallsyms.h>
+#include <linux/printk.h>
 #include <linux/ptrace.h>
 
-#define LOGD(fmt, msg...)	pr_notice(fmt, ##msg)
-#define LOGV(fmt, msg...)
-#define LOGI	LOGD
+#define LOGD(fmt, msg...)	pr_debug(fmt, ##msg)
+#define LOGV(fmt, msg...)	pr_debug(fmt, ##msg)
+#define LOGI(fmt, msg...)	pr_debug(fmt, ##msg)
 #define LOGE(fmt, msg...)	pr_err(fmt, ##msg)
 #define LOGW	LOGE
 

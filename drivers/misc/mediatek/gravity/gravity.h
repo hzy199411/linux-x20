@@ -36,7 +36,6 @@
 #include <hwmsen_helper.h>
 #include <hwmsensor.h>
 
-#define DEBUG
 
 #ifdef DEBUG
 #define GRAV_TAG					"<GRAVITYSENSOR> "

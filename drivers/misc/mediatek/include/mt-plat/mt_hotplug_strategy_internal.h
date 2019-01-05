@@ -64,6 +64,7 @@
 /*
  * LOG
  */
+#ifdef HSP_ENABLE_DEBUG
 #define hps_emerg(fmt, args...)		pr_emerg("[HPS] " fmt, ##args)
 #define hps_alert(fmt, args...)		pr_alert("[HPS] " fmt, ##args)
 #define hps_crit(fmt, args...)		pr_crit("[HPS] " fmt, ##args)
@@ -72,6 +73,17 @@
 #define hps_notice(fmt, args...)	pr_notice("[HPS] " fmt, ##args)
 #define hps_info(fmt, args...)		pr_info("[HPS] " fmt, ##args)
 #define hps_debug(fmt, args...)		pr_devel("[HPS] " fmt, ##args)
+#else  // HSP_ENABLE_DEBUG
+#define hps_emerg(fmt, args...)		pr_emerg("[HPS] " fmt, ##args)
+#define hps_alert(fmt, args...)		pr_alert("[HPS] " fmt, ##args)
+#define hps_crit(fmt, args...)		pr_crit("[HPS] " fmt, ##args)
+#define hps_error(fmt, args...)		pr_err("[HPS] " fmt, ##args)
+#define hps_warn(fmt, args...)		pr_debug("[HPS] " fmt, ##args)
+#define hps_notice(fmt, args...)	pr_debug("[HPS] " fmt, ##args)
+#define hps_info(fmt, args...)		pr_debug("[HPS] " fmt, ##args)
+#define hps_debug(fmt, args...)		pr_debug("[HPS] " fmt, ##args)
+#endif // HSP_ENABLE_DEBUG
+
 
 #define hps_read(addr)			__raw_readl(IOMEM(addr))
 #define hps_write(addr, val)		mt_reg_sync_writel(val, addr)

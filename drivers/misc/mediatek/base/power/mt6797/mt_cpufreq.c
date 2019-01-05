@@ -18,7 +18,6 @@
  */
 
 #define __MT_CPUFREQ_C__
-#define DEBUG 1
 /* system includes */
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -877,9 +876,9 @@ ktime_t dvfs_cb_step_delta[16];
 #define cpufreq_err(fmt, args...)       \
 	pr_err(TAG"[ERROR]"fmt, ##args)
 #define cpufreq_warn(fmt, args...)      \
-	pr_warn(TAG"[WARNING]"fmt, ##args)
+	pr_debug(TAG"[WARNING]"fmt, ##args)
 #define cpufreq_info(fmt, args...)      \
-	pr_warn(TAG""fmt, ##args)
+	pr_debug(TAG""fmt, ##args)
 #define cpufreq_dbg(fmt, args...)       \
 	pr_debug(TAG""fmt, ##args)
 #define cpufreq_ver(fmt, args...)       \

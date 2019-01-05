@@ -50,7 +50,7 @@
 #include "mt_spm_idle.h"
 
 #define IDLE_TAG     "[Power/swap]"
-#define idle_warn(fmt, args...)		pr_warn(IDLE_TAG fmt, ##args)
+#define idle_warn(fmt, args...)		pr_debug(IDLE_TAG fmt, ##args)
 #define idle_dbg(fmt, args...)		pr_debug(IDLE_TAG fmt, ##args)
 
 #define idle_warn_log(fmt, args...) { \

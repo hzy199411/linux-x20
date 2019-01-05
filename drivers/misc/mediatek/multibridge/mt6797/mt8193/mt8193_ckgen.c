@@ -12,7 +12,6 @@
  */
 
 #define pr_fmt(fmt) "mt8193-ckgen: " fmt
-#define DEBUG 1
 
 #include <linux/slab.h>
 #include <linux/init.h>

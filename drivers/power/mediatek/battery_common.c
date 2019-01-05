@@ -2089,7 +2089,6 @@ unsigned int bat_get_ui_percentage(void)
 	/* for plugging out charger in recharge phase, using SOC as UI_SOC */
 
 #if defined(CONFIG_POWER_EXT)
-	battery_log(BAT_LOG_CRTI, "[BATTERY] bat_get_ui_percentage return 100 !!\n\r");
 	return 100;
 #else
 	if (chr_wake_up_bat == KAL_TRUE)

@@ -3425,7 +3425,7 @@ int dlpt_notify_handler(void *unused)
 
 				pre_ui_soc = cur_ui_soc;
 
-				pr_err("[DLPT_final] %d,%d,%d,%d,%d,%d\n",
+				pr_debug("[DLPT_final] %d,%d,%d,%d,%d,%d\n",
 					g_imix_val, g_imix_val_pre, pre_ui_soc, cur_ui_soc,
 					diff_ui_soc, IMAX_MAX_VALUE);
 			}

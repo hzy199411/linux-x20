@@ -12,7 +12,6 @@
  */
 
 #define pr_fmt(fmt) "mt8193-iic: " fmt
-#define DEBUG 1
 
 #include <generated/autoconf.h>
 #include <linux/mm.h>

@@ -67,7 +67,6 @@ typedef enum
     MHL_PGIO_FUNCTION_MODE
 }mhl_gpio_mode;
 
-#define DEBUG
 #if defined(DEBUG)
 
 void print_formatted_debug_msg(int level,

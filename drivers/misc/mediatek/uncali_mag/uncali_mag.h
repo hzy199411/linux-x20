@@ -38,7 +38,6 @@
 #include <hwmsensor.h>
 #include <hwmsen_dev.h>
 
-#define DEBUG
 
 #ifdef DEBUG
 #define UNCALI_MAG_TAG						"<UNCALI_MAG> "

@@ -604,15 +604,16 @@ static u32 pause_log_en = /*PSF_PAUSE_SUSPEND |*/
  * dbgx_log_en[15:0] : show on UART/MobileLog
  * dbgx_log_en[31:16]: show on MobileLog
  */
-static u32 dbgx_log_en = /*(DLF_DVFS << 16) |*/
+static u32 dbgx_log_en = 0;
+			 /*(DLF_DVFS << 16) |*/
 			 /*DLF_NOTIFY |*/
 			 /*DLF_LIMIT |*/
-			 DLF_STOP |
-			 DLF_PAUSE |
+			 /*DLF_STOP |*/
+			 /*DLF_PAUSE |*/
 			 /*DLF_SEMA |*/
 			 /*DLF_DVFS |*/
-			 DLF_CLUSTER |
-			 DLF_KICK;
+			 /*DLF_CLUSTER |*/
+			 /*DLF_KICK*/
 
 #ifdef __TRIAL_RUN__
 static u32 dvfs_fail_ke = 1;

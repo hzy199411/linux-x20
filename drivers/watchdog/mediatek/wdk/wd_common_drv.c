@@ -493,7 +493,7 @@ static int kwdt_thread(void *arg)
 					     local_bit, cpu, wk_check_kick_bit(), lasthpg_cpu, lasthpg_act,
 					     lasthpg_t, sched_clock());
 					if (local_bit == wk_check_kick_bit()) {
-						printk_deferred("[WDK]: kick Ex WDT,RT[%lld]\n",
+						pr_debug("[WDK]: kick Ex WDT,RT[%lld]\n",
 								sched_clock());
 						mtk_wdt_restart(WD_TYPE_NORMAL);	/* for KICK external wdt */
 						local_bit = 0;

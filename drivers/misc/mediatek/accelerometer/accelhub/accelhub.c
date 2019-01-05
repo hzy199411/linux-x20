@@ -17,7 +17,6 @@
 #include <linux/notifier.h>
 #include "scp_helper.h"
 
-#define DEBUG 1
 #define SW_CALIBRATION
 #define ACCELHUB_AXIS_X          0
 #define ACCELHUB_AXIS_Y          1

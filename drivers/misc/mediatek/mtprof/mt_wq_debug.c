@@ -11,7 +11,6 @@
  * GNU General Public License for more details.
  */
 
-#define DEBUG 1
 
 #include <asm/uaccess.h>
 #include <linux/module.h>

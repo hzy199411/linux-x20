@@ -51,7 +51,6 @@
 #include <mach/mt_clkmgr.h>
 #include <scp_helper.h>
 /*----------------------------------------------------------------------------*/
-/* #define DEBUG 1 */
 /* #define SENSORHUB_UT */
 /*----------------------------------------------------------------------------*/
 /* #define CONFIG_SCP_sensorHub_LOWPASS   //apply low pass filter on output */

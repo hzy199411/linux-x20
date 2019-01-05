@@ -39,7 +39,6 @@
 #include <hwmsen_dev.h>
 
 
-#define DEBUG
 
 #ifdef DEBUG
 #define UNCALI_GYRO_TAG						"<UNCALI_GYRO> "

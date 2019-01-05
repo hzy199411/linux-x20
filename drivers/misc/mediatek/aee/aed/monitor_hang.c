@@ -471,7 +471,7 @@ static int hang_detect_thread(void *arg)
 				hang_detect_counter = hd_timeout + 4;
 				hd_detect_enabled = 0;
 			}
-			LOGE("[Hang_Detect] hang_detect disabled.\n");
+			LOGD("[Hang_Detect] hang_detect disabled.\n");
 		}
 
 		msleep((HD_INTER) * 1000);
@@ -491,7 +491,7 @@ void aee_kernel_RT_Monitor_api(int lParam)
 		hd_detect_enabled = 0;
 		hang_detect_counter =
 			hd_timeout;
-		LOGE("[Hang_Detect] hang_detect disabled\n");
+		LOGD("[Hang_Detect] hang_detect disabled\n");
 	} else if (lParam > 0) {
 		/* lParem=0x1000|timeout,only set in aee call when NE in system_server
 		*  so only change hang_detect_counter when call from AEE
