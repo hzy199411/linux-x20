@@ -1,0 +1,143 @@
+/*
+ * Copyright (c) 2016 MediaTek Inc.
+ * Author: Mars.C <mars.cheng@mediatek.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+#include "mt6797.dtsi"
+
+/ {
+	model = "MediaTek MT6797 Evaluation Board";
+	compatible = "mediatek,mt6797-evb", "mediatek,mt6797";
+
+	chosen {
+		bootargs = "console=tty0 console=ttyMT0,921600n1 root=/dev/ram \
+			initrd=0x44000000,0x200000 loglevel=8 androidboot.selinux=permissive";
+	};
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	memory@40000000 {
+		device_type = "memory";
+		reg = <0 0x40000000 0 0x40000000>;
+		/*TODO: add memory node here*/
+	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		spm-dummy-1@40000000{
+			compatible = "mediatek,spm-dummy-1";
+			reg = <0 0x40000000 0 0x1000>;
+		};
+
+		reserve-memory-ccci_md1 {
+			compatible = "mediatek,reserve-memory-ccci_md1";
+			no-map;
+			size = <0 0xa100000>; /* md_size+smem_size */
+			alignment = <0 0x2000000>;
+			alloc-ranges = <0 0x40000000 0 0x80000000>;
+		};
+
+		reserve-memory-ccci_share {
+			compatible = "mediatek,reserve-memory-ccci_share";
+			no-map;
+			size = <0 0x600000>; /* md_size+smem_size */
+			alignment = <0 0x4000000>;
+			alloc-ranges = <0 0x40000000 0 0x50000000>;
+		};
+
+		minirdump-reserved-memory@444f0000 {
+			compatible = "minirdump-reserve-memory";
+			reg = <0 0x444f0000 0 0x10000>;
+		};
+
+		preloader-reserved-memory@44800000 {
+			compatible = "mediatek,preloader";
+			reg = <0 0x44800000 0 0x100000>;
+		};
+
+		lk-reserved-memory@46000000 {
+			compatible = "mediatek,lk";
+			reg = <0 0x46000000 0 0x400000>;
+		};
+
+		ram_console-reserved-memory@44400000 {
+			compatible = "ram_console-reserve-memory";
+			reg = <0 0x44400000 0 0x10000>;
+		};
+
+		pstore-reserved-memory@44410000 {
+			compatible = "mediatek,pstore";
+			reg = <0 0x44410000 0 0xe0000>;
+		};
+
+		consys-reserve-memory {
+			compatible = "mediatek,consys-reserve-memory";
+			no-map;
+			size = <0 0x200000>;
+			alignment = <0 0x200000>;
+			alloc-ranges = <0 0x40000000 0 0x80000000>;
+		};
+
+		spm-reserve-memory {
+			compatible = "mediatek,spm-reserve-memory";
+			no-map;
+			size = <0 0x16000>; /* PCM_FIRMWARE_SIZE * DYNA_LOAD_PCM_MAX = 8K * 11 */
+			alignment = <0 0x10000>;
+			alloc-ranges = <0 0x40000000 0 0x80000000>;
+		};
+
+		/* we reserved 2 sections for ATF */
+		/* atf-reserved-memory for ATF image, xlat tab, bss, etc. */
+		/* atf-ramdump-memory for ATF debug purpose, for ramdump */
+		/* We use MPU region 1 to protected these 2 sections */
+		/* reserve 64KB at DRAM start + 70MB, for ATF use */
+		atf-reserved-memory@44600000 {
+			compatible = "mediatek,mt6797-atf-reserved-memory";
+			no-map;
+			reg = <0 0x44600000 0 0x10000>;
+		};
+
+		/* reserve 192KB after atf-reserved-memory, for ATF ramdump */
+		atf-ramdump-memory@44610000 {
+			compatible = "mediatek,mt6797-atf-ramdump-memory";
+			no-map;
+			reg = <0 0x44610000 0 0x30000>;
+		};
+
+		/* reserve 192KB after ATF ramdump, for icache dump */
+		cache-dump-memory@44640000 {
+			compatible = "mediatek,cache-dump-memory";
+			no-map;
+			reg = <0 0x44640000 0 0x30000>;
+		};
+
+		reserve-memory-scp_share {
+			compatible = "mediatek,reserve-memory-scp_share";
+			no-map;
+			size = <0 0x1000000>; /*16 MB share mem size */
+			alignment = <0 0x1000000>;
+			alloc-ranges = <0 0x40000000 0 0x50000000>; /*0x4000_0000~0x8FFF_FFFF*/
+		};
+
+	};
+	chosen {};
+};
+
+&uart0 {
+	status = "okay";
+};
