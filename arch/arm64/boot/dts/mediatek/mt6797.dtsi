@@ -239,4 +239,25 @@
 		      <0 0x19200000 0 0x200000>,   /* GICR */
 		      <0 0x10240000 0 0x2000>;     /* GICC */
 	};
+	soc {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges = <0 0 0 0xffffffff>;
+		chipid@08000000 {
+			compatible = "mediatek,chipid";
+			reg = <0x08000000 0x0004>,
+				<0x08000004 0x0004>,
+				<0x08000008 0x0004>,
+				<0x0800000C 0x0004>;
+		};
+		scp: scp@10020000 {
+			compatible = "mediatek,scp";
+			status = "disabled";
+			reg = <0x10020000 0x80000>,	/* sram */
+				<0x100a0000 0x1000>,	/* cfgreg */
+				<0x100a4000 0x1000>;	/* clkctrl */
+			interrupts = <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
+		};
+	};
 };
