@@ -135,8 +135,115 @@
 		};
 
 	};
+
+	reg_1p8v: regulator-1p8v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-1.8V";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-always-on;
+	};
+
+	reg_3p3v: regulator-3p3v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-3.3V";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	reg_5v: regulator-5v {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-5V";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	firmware {
+		android {
+			compatible = "android,firmware";
+			fstab {
+				compatible = "android,fstab";
+				system {
+					compatible = "android,system";
+					dev = "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/system";
+					type = "ext4";
+					mnt_flags = "ro" ;
+					fsmgr_flags = "wait";
+					status = "ok";
+				};
+			};
+		};
+	};
+};
+
+&pio {
+	emmc_pins_default: emmc-pins-default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO114__FUNC_MSDC0_DAT0>,
+				 <PINMUX_GPIO115__FUNC_MSDC0_DAT1>,
+				 <PINMUX_GPIO116__FUNC_MSDC0_DAT2>,
+				 <PINMUX_GPIO117__FUNC_MSDC0_DAT3>,
+				 <PINMUX_GPIO118__FUNC_MSDC0_DAT4>,
+				 <PINMUX_GPIO119__FUNC_MSDC0_DAT5>,
+				 <PINMUX_GPIO120__FUNC_MSDC0_DAT6>,
+				 <PINMUX_GPIO121__FUNC_MSDC0_DAT7>,
+				 <PINMUX_GPIO122__FUNC_MSDC0_CMD>;
+			input-enable;
+			bias-pull-up;
+		};
+		pins_clk {
+			pinmux = <PINMUX_GPIO123__FUNC_MSDC0_CLK>;
+			bias-pull-down;
+		};
+		pins_rst {
+			pinmux = <PINMUX_GPIO125__FUNC_MSDC0_RSTB>;
+			bias-pull-up;
+		};
+	};
+	emmc_pins_uhs: emmc-pins-uhs {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO114__FUNC_MSDC0_DAT0>,
+				 <PINMUX_GPIO115__FUNC_MSDC0_DAT1>,
+				 <PINMUX_GPIO116__FUNC_MSDC0_DAT2>,
+				 <PINMUX_GPIO117__FUNC_MSDC0_DAT3>,
+				 <PINMUX_GPIO118__FUNC_MSDC0_DAT4>,
+				 <PINMUX_GPIO119__FUNC_MSDC0_DAT5>,
+				 <PINMUX_GPIO120__FUNC_MSDC0_DAT6>,
+				 <PINMUX_GPIO121__FUNC_MSDC0_DAT7>,
+				 <PINMUX_GPIO122__FUNC_MSDC0_CMD>;
+			input-enable;
+			bias-pull-up;
+		};
+		pins_clk {
+			pinmux = <PINMUX_GPIO123__FUNC_MSDC0_CLK>;
+			bias-pull-down;
+		};
+		pins_rst {
+			pinmux = <PINMUX_GPIO125__FUNC_MSDC0_RSTB>;
+			bias-pull-up;
+		};
+	};
 };
 
 &uart0 {
 	status = "okay";
 };
+
+&mmc0 {
+	pinctrl-names = "default", "state_uhs";
+	pinctrl-0 = <&emmc_pins_default>;
+	pinctrl-1 = <&emmc_pins_uhs>;
+	status = "okay";
+	bus-width = <8>;
+	max-frequency = <50000000>;
+	cap-mmc-highspeed;
+	mmc-hs200-1_8v;
+	vmmc-supply = <&reg_3p3v>;
+	vqmmc-supply = <&reg_1p8v>;
+	non-removable;
+};
+
